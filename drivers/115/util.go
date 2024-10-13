@@ -160,7 +160,7 @@ func (d *Pan115) rapidUpload(fileSize int64, fileName, dirID, preID, fileID stri
 	userID := strconv.FormatInt(d.client.UserID, 10)
 	form := url.Values{}
 	form.Set("appid", "0")
-	form.Set("appversion", appVer())
+	form.Set("appversion", appVer)
 	form.Set("userid", userID)
 	form.Set("filename", fileName)
 	form.Set("filesize", fileSizeStr)
