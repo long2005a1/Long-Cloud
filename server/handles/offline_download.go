@@ -8,7 +8,6 @@ import (
 	"github.com/alist-org/alist/v3/internal/task"
 	"github.com/alist-org/alist/v3/server/common"
 	"github.com/gin-gonic/gin"
-	"github.com/xhofe/tache"
 )
 
 type SetAria2Req struct {
