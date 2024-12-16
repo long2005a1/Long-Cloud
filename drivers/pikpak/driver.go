@@ -91,7 +91,7 @@ func (d *PikPak) Init(ctx context.Context) (err error) {
 		// 如果没有填写RefreshToken，尝试登录 获取 refreshToken
 		if err = d.login(); err != nil {
 			return err
-
+		}
 	}
 
 	// 获取CaptchaToken

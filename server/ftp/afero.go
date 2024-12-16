@@ -80,8 +80,8 @@ func (a *AferoAdapter) ReadDir(name string) ([]os.FileInfo, error) {
 }
 
 func (a *AferoAdapter) GetHandle(name string, flags int, offset int64) (ftpserver.FileTransfer, error) {
-	ctx          context.Context
-	nextFileSize int64
+	fileSize := a.nextFileSize
+	a.nextFileSize = 0
 	if offset != 0 {
 		return nil, errs.NotSupport
 	}
