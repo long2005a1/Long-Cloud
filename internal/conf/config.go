@@ -180,7 +180,7 @@ func DefaultConfig() *Config {
 			SSL:    false,
 		},
 		FTP: FTP{
-			Enable:                  true,
+			Enable:                  false,
 			Listen:                  ":5221",
 			FindPasvPortAttempts:    50,
 			ActiveTransferPortNon20: false,
@@ -192,7 +192,7 @@ func DefaultConfig() *Config {
 			EnablePasvConnIPCheck:   true,
 		},
 		SFTP: SFTP{
-			Enable: true,
+			Enable: false,
 			Listen: ":5222",
 		},
 	}
