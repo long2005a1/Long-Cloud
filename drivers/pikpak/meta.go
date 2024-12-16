@@ -14,7 +14,6 @@ type Addition struct {
 	CaptchaToken     string `json:"captcha_token" default:""`
 	DeviceID         string `json:"device_id"  required:"false" default:""`
 	DisableMediaLink bool   `json:"disable_media_link" default:"true"`
-	DisableMediaLink   bool   `json:"disable_media_link" default:"true"`
 }
 
 var config = driver.Config{
