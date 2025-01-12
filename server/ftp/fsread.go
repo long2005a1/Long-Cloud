@@ -25,12 +25,8 @@ type FileDownloadProxy struct {
 	closers *utils.Closers
 }
 
-func OpenDownload(ctx context.Context, path string) (*FileDownloadProxy, error) {
+func OpenDownload(ctx context.Context, reqPath string) (*FileDownloadProxy, error) {
 	user := ctx.Value("user").(*model.User)
-	reqPath, err := user.JoinPath(path)
-	if err != nil {
-		return nil, err
-	}
 	meta, err := op.GetNearestMeta(reqPath)
 	if err != nil {
 		if !errors.Is(errors.Cause(err), errs.MetaNotFound) {
