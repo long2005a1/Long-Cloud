@@ -82,6 +82,7 @@ type SetTransmissionReq struct {
 	Uri      string `json:"uri" form:"uri"`
 	Seedtime string `json:"seedtime" form:"seedtime"`
 }
+
 func SetTransmission(c *gin.Context) {
 	var req SetTransmissionReq
 	if err := c.ShouldBind(&req); err != nil {
@@ -132,7 +133,7 @@ func AddOfflineDownload(c *gin.Context) {
 		common.ErrorResp(c, err, 403)
 		return
 	}
-	var tasks []task.TaskInfoWithCreator
+	var tasks []task.TaskExtensionInfo
 	for _, url := range req.Urls {
 		t, err := tool.AddURL(c, &tool.AddURLArgs{
 			URL:          url,
