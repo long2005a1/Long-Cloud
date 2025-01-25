@@ -19,7 +19,7 @@ func GetApiUrl(r *http.Request) string {
 		if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
 			protocol = "https"
 		}
-		hhost := r.Header.Get("X-Forwarded-Host")
+		host := r.Header.Get("X-Forwarded-Host")
 		if host == "" {
 			host = r.Host
 		}
