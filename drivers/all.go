@@ -37,6 +37,7 @@ import (
 	_ "github.com/alist-org/alist/v3/drivers/local"
 	_ "github.com/alist-org/alist/v3/drivers/mediatrack"
 	_ "github.com/alist-org/alist/v3/drivers/mega"
+	_ "github.com/alist-org/alist/v3/drivers/misskey"
 	_ "github.com/alist-org/alist/v3/drivers/mopan"
 	_ "github.com/alist-org/alist/v3/drivers/netease_music"
 	_ "github.com/alist-org/alist/v3/drivers/onedrive"
