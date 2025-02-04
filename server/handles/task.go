@@ -97,7 +97,7 @@ func getTargetedHandler[T task.TaskExtensionInfo](manager task.Manager[T], callb
 	}
 }
 
-func getBatchHandler[T task.TaskExtensionInfo](manager *tache.Manager[T], callback func(task T)) gin.HandlerFunc {
+func getBatchHandler[T task.TaskExtensionInfo](manager task.Manager[T], callback func(task T)) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		isAdmin, uid, ok := getUserInfo(c)
 		if !ok {
