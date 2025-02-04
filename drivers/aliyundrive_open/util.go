@@ -121,7 +121,7 @@ func (d *AliyundriveOpen) requestReturnErrResp(uri, method string, callback base
 	}
 	isRetry := len(retry) > 0 && retry[0]
 	if e.Code != "" {
-		if !isRetry && (utils.SliceContains([]string{"AccessTokenInvalid", "AccessTokenExpired", "I400JD"}, e.Code) || d.getAccessToken()n == "") {
+		if !isRetry && (utils.SliceContains([]string{"AccessTokenInvalid", "AccessTokenExpired", "I400JD"}, e.Code) || d.getAccessToken() == "") {
 			err = d.refreshToken()
 			if err != nil {
 				return nil, err, nil
