@@ -30,7 +30,7 @@ type LoginReq struct {
 func Login(c *gin.Context) {
 	var req LoginReq
 	if err := c.ShouldBind(&req); err != nil {
-		common.ErrorResp(c, "登录已失效", 400)
+		common.ErrorStrResp(c, "登录已失效", 400)
 		return
 	}
 	req.Password = model.StaticHash(req.Password)
@@ -41,7 +41,7 @@ func Login(c *gin.Context) {
 func LoginHash(c *gin.Context) {
 	var req LoginReq
 	if err := c.ShouldBind(&req); err != nil {
-		common.ErrorResp(c, "用户名或密码错误", 400)
+		common.ErrorStrResp(c, "用户名或密码错误", 400)
 		return
 	}
 	loginHash(c, &req)
@@ -59,13 +59,13 @@ func loginHash(c *gin.Context, req *LoginReq) {
 	// check username
 	user, err := op.GetUserByName(req.Username)
 	if err != nil {
-		common.ErrorResp(c, "用户名错误", 400)
+		common.ErrorStrResp(c, "用户名错误", 400)
 		loginCache.Set(ip, count+1)
 		return
 	}
 	// validate password hash
 	if err := user.ValidatePwdStaticHash(req.Password); err != nil {
-		common.ErrorResp(c, "密码错误", 400)
+		common.ErrorStrResp(c, "密码错误", 400)
 		loginCache.Set(ip, count+1)
 		return
 	}
@@ -80,7 +80,7 @@ func loginHash(c *gin.Context, req *LoginReq) {
 	// generate token
 	token, err := common.GenerateToken(user)
 	if err != nil {
-		common.ErrorResp(c, "Token 错误", 400, true)
+		common.ErrorStrResp(c, "Token 错误", 400, true)
 		return
 	}
 	common.SuccessResp(c, gin.H{"token": token})
@@ -162,7 +162,7 @@ type Verify2FAReq struct {
 func Verify2FA(c *gin.Context) {
 	var req Verify2FAReq
 	if err := c.ShouldBind(&req); err != nil {
-		common.ErrorResp(c, "2FA 验证失败", 400)
+		common.ErrorStrResp(c, "2FA 验证失败", 400)
 		return
 	}
 	user := c.MustGet("user").(*model.User)
@@ -176,7 +176,7 @@ func Verify2FA(c *gin.Context) {
 	}
 	user.OtpSecret = req.Secret
 	if err := op.UpdateUser(user); err != nil {
-		common.ErrorResp(c, "无效的 OTP 代码", 500)
+		common.ErrorStrResp(c, "无效的 OTP 代码", 500)
 	} else {
 		common.SuccessResp(c)
 	}
