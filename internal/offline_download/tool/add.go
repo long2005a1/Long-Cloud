@@ -7,15 +7,15 @@ import (
 	"path/filepath"
 
 	_115 "github.com/alist-org/alist/v3/drivers/115"
- 	"github.com/alist-org/alist/v3/drivers/pikpak"
- 	"github.com/alist-org/alist/v3/drivers/thunder"
+	"github.com/alist-org/alist/v3/drivers/pikpak"
+	"github.com/alist-org/alist/v3/drivers/thunder"
 	"github.com/alist-org/alist/v3/internal/conf"
 	"github.com/alist-org/alist/v3/internal/errs"
 	"github.com/alist-org/alist/v3/internal/fs"
- 	"github.com/alist-org/alist/v3/internal/model"
+	"github.com/alist-org/alist/v3/internal/model"
 	"github.com/alist-org/alist/v3/internal/op"
 	"github.com/alist-org/alist/v3/internal/setting"
- 	"github.com/alist-org/alist/v3/internal/task"
+	"github.com/alist-org/alist/v3/internal/task"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 )
@@ -104,7 +104,7 @@ func AddURL(ctx context.Context, args *AddURLArgs) (task.TaskExtensionInfo, erro
 			tempDir = filepath.Join(setting.GetStr(conf.ThunderTempDir), uid)
 		}
 	}
-	
+
 	taskCreator, _ := ctx.Value("user").(*model.User) // taskCreator is nil when convert failed
 	t := &DownloadTask{
 		TaskExtension: task.TaskExtension{
@@ -122,12 +122,12 @@ func AddURL(ctx context.Context, args *AddURLArgs) (task.TaskExtensionInfo, erro
 }
 
 func tryPutUrl(ctx context.Context, path, urlStr string) error {
- 	var dstName string
-	}
+	var dstName string
 	u, err := url.Parse(urlStr)
 	if err == nil {
 		dstName = stdpath.Base(u.Path)
 	} else {
 		dstName = "UnnamedURL"
-		return fs.PutURL(ctx, path, dstName, urlStr)
+	}
+	return fs.PutURL(ctx, path, dstName, urlStr)
 }
