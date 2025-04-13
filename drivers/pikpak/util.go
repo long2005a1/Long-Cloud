@@ -7,13 +7,6 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
-	"github.com/alist-org/alist/v3/internal/driver"
-	"github.com/alist-org/alist/v3/internal/model"
-	"github.com/alist-org/alist/v3/internal/op"
-	"github.com/alist-org/alist/v3/pkg/utils"
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	jsoniter "github.com/json-iterator/go"
-	"github.com/pkg/errors"
 	"io"
 	"net/http"
 	"path/filepath"
@@ -24,36 +17,43 @@ import (
 	"time"
 
 	"github.com/alist-org/alist/v3/drivers/base"
+	"github.com/alist-org/alist/v3/internal/driver"
+	"github.com/alist-org/alist/v3/internal/model"
+	"github.com/alist-org/alist/v3/internal/op"
+	"github.com/alist-org/alist/v3/pkg/utils"
+	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/go-resty/resty/v2"
+	jsoniter "github.com/json-iterator/go"
+	"github.com/pkg/errors"
 )
 
 var AndroidAlgorithms = []string{
 	"SOP04dGzk0TNO7t7t9ekDbAmx+eq0OI1ovEx",
- 	"nVBjhYiND4hZ2NCGyV5beamIr7k6ifAsAbl",
- 	"Ddjpt5B/Cit6EDq2a6cXgxY9lkEIOw4yC1GDF28KrA",
- 	"VVCogcmSNIVvgV6U+AochorydiSymi68YVNGiz",
- 	"u5ujk5sM62gpJOsB/1Gu/zsfgfZO",
- 	"dXYIiBOAHZgzSruaQ2Nhrqc2im",
- 	"z5jUTBSIpBN9g4qSJGlidNAutX6",
- 	"KJE2oveZ34du/g1tiimm",
+	"nVBjhYiND4hZ2NCGyV5beamIr7k6ifAsAbl",
+	"Ddjpt5B/Cit6EDq2a6cXgxY9lkEIOw4yC1GDF28KrA",
+	"VVCogcmSNIVvgV6U+AochorydiSymi68YVNGiz",
+	"u5ujk5sM62gpJOsB/1Gu/zsfgfZO",
+	"dXYIiBOAHZgzSruaQ2Nhrqc2im",
+	"z5jUTBSIpBN9g4qSJGlidNAutX6",
+	"KJE2oveZ34du/g1tiimm",
 }
 
 var WebAlgorithms = []string{
 	"C9qPpZLN8ucRTaTiUMWYS9cQvWOE",
- 	"+r6CQVxjzJV6LCV",
- 	"F",
- 	"pFJRC",
- 	"9WXYIDGrwTCz2OiVlgZa90qpECPD6olt",
- 	"/750aCr4lm/Sly/c",
- 	"RB+DT/gZCrbV",
- 	"",
- 	"CyLsf7hdkIRxRm215hl",
- 	"7xHvLi2tOYP0Y92b",
- 	"ZGTXXxu8E/MIWaEDB+Sm/",
- 	"1UI3",
- 	"E7fP5Pfijd+7K+t6Tg/NhuLq0eEUVChpJSkrKxpO",
- 	"ihtqpG6FMt65+Xk+tWUH2",
- 	"NhXXU9rg4XXdzo7u5o",
+	"+r6CQVxjzJV6LCV",
+	"F",
+	"pFJRC",
+	"9WXYIDGrwTCz2OiVlgZa90qpECPD6olt",
+	"/750aCr4lm/Sly/c",
+	"RB+DT/gZCrbV",
+	"",
+	"CyLsf7hdkIRxRm215hl",
+	"7xHvLi2tOYP0Y92b",
+	"ZGTXXxu8E/MIWaEDB+Sm/",
+	"1UI3",
+	"E7fP5Pfijd+7K+t6Tg/NhuLq0eEUVChpJSkrKxpO",
+	"ihtqpG6FMt65+Xk+tWUH2",
+	"NhXXU9rg4XXdzo7u5o",
 }
 
 var PCAlgorithms = []string{
@@ -516,7 +516,7 @@ func (d *PikPak) UploadByMultipart(ctx context.Context, params *S3Params, fileSi
 						continue
 					}
 
-					b := driver.NewLimitedUploadStream(ctx, bytes.NewBuffer(buf))
+					b := driver.NewLimitedUploadStream(ctx, bytes.NewReader(buf))
 					if part, err = bucket.UploadPart(imur, b, chunk.Size, chunk.Number, OssOption(params)...); err == nil {
 						break
 					}
