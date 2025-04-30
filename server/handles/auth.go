@@ -113,6 +113,10 @@ func UpdateCurrent(c *gin.Context) {
 		return
 	}
 	user := c.MustGet("user").(*model.User)
+	if user.IsGuest() {
+		common.ErrorStrResp(c, "来宾用户无法更新配置文件", 403)
+		return
+	}
 	user.Username = req.Username
 	if req.Password != "" {
 		user.SetPassword(req.Password)
