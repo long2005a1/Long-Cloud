@@ -66,7 +66,7 @@ func (x *Thunder) Init(ctx context.Context) (err error) {
 				ClientSecret:      "Xp6vsy4tN9toTVdMSpomVdXpRmES",
 				ClientVersion:     "8.31.0.9726",
 				PackageName:       "com.xunlei.downloadprovider",
-				UUserAgent:         "ANDROID-com.xunlei.downloadprovider/8.31.0.9726 netWorkType/5G appid/40 deviceName/Xiaomi_M2004j7ac deviceModel/M2004J7AC OSVersion/12 protocolVersion/301 platformVersion/10 sdkVersion/512000 Oauth2Client/0.9 (Linux 4_14_186-perf-gddfs8vbb238b) (JAVA 0)",
+				UserAgent:         "ANDROID-com.xunlei.downloadprovider/8.31.0.9726 netWorkType/5G appid/40 deviceName/Xiaomi_M2004j7ac deviceModel/M2004J7AC OSVersion/12 protocolVersion/301 platformVersion/10 sdkVersion/512000 Oauth2Client/0.9 (Linux 4_14_186-perf-gddfs8vbb238b) (JAVA 0)",
 				DownloadUserAgent: "Dalvik/2.1.0 (Linux; U; Android 12; M2004J7AC Build/SP1A.210812.016)",
 				refreshCTokenCk: func(token string) {
 					x.CaptchaToken = token
